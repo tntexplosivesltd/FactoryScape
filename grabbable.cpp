@@ -1,15 +1,23 @@
 #include "grabbable.hpp"
 
+/**
+ * @brief Constructor
+ * @param my_x The x-coordinate of the grabbable object
+ * @param my_y The y-coordinate of the grabbable object
+ * @param my_width The width of the grabbable object
+ * @param my_height The height of the grabbable object
+ */
 Grabbable::Grabbable(float my_x, float my_y, float my_width, float my_height, const sf::Color color):
-  size(sf::Vector2f(my_width, my_height))
+  size(sf::Vector2f(my_width, my_height)),
+  pos(sf::Vector2f(my_x, my_y))
 {
-  pos = sf::Vector2f(my_x, my_y);
   box.setPosition(pos);
   box.setSize(size);
   box.setFillColor(color);
   grab_color = sf::Color::White;
   hover_color = sf::Color::Yellow;
 }
+
 
 void Grabbable::set_grabbed(bool is_grabbed) { grabbed = is_grabbed; }
 void Grabbable::set_hover(bool is_hover) { hover = is_hover; }
@@ -35,7 +43,7 @@ void Grabbable::set_fill_color(sf::Color new_color)
 void Grabbable::set_grab_color(sf::Color new_color) { grab_color = new_color; }
 void Grabbable::set_hover_color(sf::Color new_color) { hover_color = new_color; }
 
-void Grabbable::drag(sf::Vector2f new_pos)
+void Grabbable::mouse_move(sf::Vector2f new_pos)
 {
     if (grabbed)
     {

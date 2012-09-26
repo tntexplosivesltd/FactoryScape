@@ -1,0 +1,33 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+CMAKE_POLICY(VERSION 2.6)
+PROJECT(FactoryScape)
+
+SET(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMake/Modules)
+
+SET(FLAGS "${FLAGS} -g")
+
+#FIND_PACKAGE(SFML REQUIRED)
+
+SET(SRCS
+  ./main.cpp 
+	./grabbable.cpp
+  )
+
+SET(PROGRAMS FactoryScape)
+
+#INCLUDE_DIRECTORIES(${SFML_INCLUDE_DIR})
+
+ADD_EXECUTABLE(FactoryScape ${SRCS})
+
+TARGET_LINK_LIBRARIES(FactoryScape
+  #${SFML_LIBRARY}
+  -lsfml-graphics
+  -lsfml-audio
+  -lsfml-window
+  -lsfml-network
+  -lsfml-system
+  )
+
+INSTALL(TARGETS FactoryScape RUNTIME DESTINATION .)
+
+SET_TARGET_PROPERTIES(FactoryScape PROPERTIES COMPILE_FLAGS "${FLAGS}")
